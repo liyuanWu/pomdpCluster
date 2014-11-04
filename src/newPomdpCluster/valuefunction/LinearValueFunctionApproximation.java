@@ -1,4 +1,4 @@
-package pomdp.valuefunction;
+package newPomdpCluster.valuefunction;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,12 +16,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import pomdp.algorithms.PolicyStrategy;
-import pomdp.environments.POMDP;
-import pomdp.utilities.AlphaVector;
-import pomdp.utilities.BeliefState;
-import pomdp.utilities.RandomGenerator;
-import pomdp.utilities.datastructures.LinkedList;
+import newPomdpCluster.algorithms.PolicyStrategy;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.AlphaVector;
+import newPomdpCluster.utilities.BeliefState;
+import newPomdpCluster.utilities.RandomGenerator;
+import newPomdpCluster.utilities.datastructures.LinkedList;
 
 public class LinearValueFunctionApproximation extends PolicyStrategy implements Serializable {
 
@@ -136,22 +136,22 @@ public class LinearValueFunctionApproximation extends PolicyStrategy implements 
 	
 	public AlphaVector getMaxAlpha( BeliefState bs ){
 		AlphaVector avMaxAlpha = null;
-		double maxValue = Double.NEGATIVE_INFINITY;//ÏÈ°ÑmaxValue³õÊ¼»¯Îª¸ºÎÞÇî
+		double maxValue = Double.NEGATIVE_INFINITY;//ï¿½È°ï¿½maxValueï¿½ï¿½Ê¼ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
-		Iterator<AlphaVector> iter =  m_vAlphaVectors.iterator();//m_vAlphaVectors.backwardIterator()Ã»ÓÐ´Ë·½·¨£¿
-		while(iter.hasNext())//ÇóÃ¿Ò»¸öÏòÁ¿ÓëbsµÄ³Ë»ý
+		Iterator<AlphaVector> iter =  m_vAlphaVectors.iterator();//m_vAlphaVectors.backwardIterator()Ã»ï¿½Ð´Ë·ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(iter.hasNext())//ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bsï¿½Ä³Ë»ï¿½
 		{
 			AlphaVector avCurrent = iter.next();
 			double value = avCurrent.dotProduct(bs);
 			
-			if(value >= maxValue)//±£´æ×î´óÖµºÍ×î´óÏòÁ¿
+			if(value >= maxValue)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				maxValue = value;
 				avMaxAlpha = avCurrent;
 			}
 		}
 		
-		if(avMaxAlpha != null)//ÉèÖÃÐÅÄîµãµÄ×î´óÖµºÍ×î´óÏòÁ¿
+		if(avMaxAlpha != null)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			bs.setMaxValue(maxValue);
 			bs.setMaxAlpha(avMaxAlpha);
@@ -161,18 +161,18 @@ public class LinearValueFunctionApproximation extends PolicyStrategy implements 
 	
 	public boolean addPrunePointwiseDominated( AlphaVector avNew ){
 		Iterator<AlphaVector> iter = m_vAlphaVectors.iterator();
-		while(iter.hasNext())//±éÀúÖµº¯ÊýÖÐµÄÏòÁ¿
+		while(iter.hasNext())//ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			AlphaVector avExisting = iter.next();
-			if( avExisting.equals( avNew ) || avExisting.dominates( avNew ) ){//avNew´æÔÚ»òÕßavNew±»Í³ÖÎÔò·µ»Øfalse
+			if( avExisting.equals( avNew ) || avExisting.dominates( avNew ) ){//avNewï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½avNewï¿½ï¿½Í³ï¿½ï¿½ï¿½ò·µ»ï¿½false
 				return false;
 			}
-			else if( avNew.dominates( avExisting ) ){//Èç¹ûavNewÍ³ÖÎÖµº¯ÊýÖÐµÄÄ³Ò»¸öÏòÁ¿£¬°ÑÕâ¸öÏòÁ¿É¾³ý
+			else if( avNew.dominates( avExisting ) ){//ï¿½ï¿½ï¿½avNewÍ³ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ä³Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 				iter.remove();
 			}
 		}
 		
-		addVector( avNew );//°ÑavNew¼ÓÈëµ½Öµº¯ÊýÖÐ
+		addVector( avNew );//ï¿½ï¿½avNewï¿½ï¿½ï¿½ëµ½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		if( m_bCacheValues ){		
 			BeliefState bsWitness = avNew.getWitness();

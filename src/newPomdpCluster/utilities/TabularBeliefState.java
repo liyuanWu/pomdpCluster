@@ -1,10 +1,10 @@
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import pomdp.utilities.datastructures.StaticMap;
+import newPomdpCluster.utilities.datastructures.StaticMap;
 
 public class TabularBeliefState extends BeliefState {
 	/**

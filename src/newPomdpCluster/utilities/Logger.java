@@ -1,4 +1,4 @@
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,8 +13,8 @@ public class Logger {
 	private static Map<Long,Logger> m_mInstances = new HashMap<Long,Logger>();
 	private Runtime m_rtRuntime;
 	private PrintStream m_psOutput;
-	private boolean m_bSilent = true;//ÔÊÐíÊä³öµ½¿ØÖÆÌ¨
-	private boolean m_bNoOutput = true;//ÔÊÐíÊä³ö
+	private boolean m_bSilent = true;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
+	private boolean m_bNoOutput = true;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	private Logger(){
 		m_iMaximalLevel = 2;

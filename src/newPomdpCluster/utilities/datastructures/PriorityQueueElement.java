@@ -1,4 +1,4 @@
-package pomdp.utilities.datastructures;
+package newPomdpCluster.utilities.datastructures;
 
 public class PriorityQueueElement{
 	private double m_dPriority;

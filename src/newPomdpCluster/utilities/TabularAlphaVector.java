@@ -1,10 +1,10 @@
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import pomdp.environments.POMDP;
-import pomdp.utilities.datastructures.StaticMap;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.datastructures.StaticMap;
 
 public class TabularAlphaVector extends AlphaVector{
 
@@ -12,7 +12,7 @@ public class TabularAlphaVector extends AlphaVector{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private double[] m_aValues;//±£´æÃ¿Ò»¸ö×´Ì¬¶ÔÓ¦µÄÖµ
+	private double[] m_aValues;//ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½×´Ì¬ï¿½ï¿½Ó¦ï¿½ï¿½Öµ
 	private StaticMap m_mValues;
 	
 	
@@ -55,7 +55,7 @@ public class TabularAlphaVector extends AlphaVector{
 		}
 	}
 	@Override
-	public void finalizeValues() {//²»¶®
+	public void finalizeValues() {//ï¿½ï¿½ï¿½ï¿½
 		m_mValues = new StaticMap( m_aValues, 0.001 );	
 		m_aValues = null;
 	}

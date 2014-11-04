@@ -1,4 +1,4 @@
-package pomdp.utilities.distance;
+package newPomdpCluster.utilities.distance;
 
 public class L1Distance extends LDistance
 {

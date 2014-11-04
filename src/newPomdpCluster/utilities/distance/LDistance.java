@@ -1,10 +1,10 @@
-package pomdp.utilities.distance;
+package newPomdpCluster.utilities.distance;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import pomdp.utilities.BeliefState;
+import newPomdpCluster.utilities.BeliefState;
 
 public abstract class LDistance implements DistanceMetric
 {

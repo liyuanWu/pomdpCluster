@@ -1,4 +1,4 @@
-package pomdp.utilities.datastructures;
+package newPomdpCluster.utilities.datastructures;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import pomdp.utilities.Pair;
+import newPomdpCluster.utilities.Pair;
 
 public class StaticMap implements Collection<Map.Entry<Integer,Double>>, Serializable{
 	private static final long serialVersionUID = 1L;

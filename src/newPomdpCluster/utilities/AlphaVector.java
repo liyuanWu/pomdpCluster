@@ -4,7 +4,7 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -15,7 +15,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import pomdp.environments.POMDP;
+import newPomdpCluster.environments.POMDP;
 
 /**
  * @author Guy Shani
@@ -44,7 +44,7 @@ public abstract class AlphaVector implements Serializable{
 
 	//private boolean m_bDominated;
 	
-	//ÕâÐ©³éÏó·½·¨»¹ÒªÔÚ¼ÌÐø¸ÄÐ´
+	//ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ó·½·ï¿½ï¿½ï¿½Òªï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ð´
 	public abstract double valueAt(int iState);
 	public abstract void setValue( int iState, double dValue );
 	public abstract int getNonZeroEntriesCount();
@@ -67,13 +67,13 @@ public abstract class AlphaVector implements Serializable{
 	}
 	
 	public boolean dominates(AlphaVector avOther){
-		if( getMaxValue() < avOther.getMaxValue() )//×î´óÖµÐ¡
+		if( getMaxValue() < avOther.getMaxValue() )//ï¿½ï¿½ï¿½ÖµÐ¡
 			return false;
 		
-		if( getAvgValue() < avOther.getAvgValue() )//Æ½¾ùÖµÐ¡
+		if( getAvgValue() < avOther.getAvgValue() )//Æ½ï¿½ï¿½ÖµÐ¡
 			return false;
 		
-		for( int iState : m_pPOMDP.getValidStates() ){//Ä³Ò»¸ö×´Ì¬µÄÖµÐ¡
+		for( int iState : m_pPOMDP.getValidStates() ){//Ä³Ò»ï¿½ï¿½×´Ì¬ï¿½ï¿½ÖµÐ¡
 			double dValue = valueAt( iState );
 			double dOtherValue = avOther.valueAt( iState );
 			if( dOtherValue > dValue )
@@ -196,18 +196,18 @@ public abstract class AlphaVector implements Serializable{
 		AlphaVector avResult = newAlphaVector();
 		avResult.setAction( iAction );
 
-		Iterator<Entry<Integer,Double>> itNonZeroEntries = null;//µÚÒ»¸ö²ÎÊýÊÇ×ªÒÆºóµÄ×´Ì¬£¬µÚ¶þ¸ö²ÎÊýÊÇ¸ÅÂÊ
+		Iterator<Entry<Integer,Double>> itNonZeroEntries = null;//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Æºï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½
 		Entry<Integer,Double> eValue = null;
 		
 		for( iStartState = 0 ; iStartState < m_cStates ; iStartState++ ){
 			dSum = 0.0;
-			itNonZeroEntries = m_pPOMDP.getNonZeroTransitions( iStartState, iAction );//×´Ì¬×ªÒÆ
+			itNonZeroEntries = m_pPOMDP.getNonZeroTransitions( iStartState, iAction );//×´Ì¬×ªï¿½ï¿½
 			
 			while( itNonZeroEntries.hasNext() ){
 				eValue = itNonZeroEntries.next();
 				iEndState = eValue.getKey();
 				dValue = valueAt( iEndState );
-				dTr = eValue.getValue();//¸ÅÂÊ
+				dTr = eValue.getValue();//ï¿½ï¿½ï¿½ï¿½
 				if( dValue != 0 ){
 					dObservation = m_pPOMDP.O( iAction, iEndState, iObservation );
 					dSum += dObservation * dTr * dValue;
@@ -215,13 +215,13 @@ public abstract class AlphaVector implements Serializable{
 			}
 			
 			if( dSum != 0 ){
-				avResult.setValue( iStartState, dSum );//Ã¿Ò»¸ö×´Ì¬µÄÖµ½øÐÐ¸üÐÂ
+				avResult.setValue( iStartState, dSum );//Ã¿Ò»ï¿½ï¿½×´Ì¬ï¿½ï¿½Öµï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½
 			}
 		}
 		avResult.finalizeValues();
 		return avResult;
 	}
-	public double dotProduct(BeliefState bs)//ÐÅÄîµãÔÚÏòÁ¿µÄÍ¶Ó°
+	public double dotProduct(BeliefState bs)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶Ó°
 	{
 		if(bs == null)
 			return 0.0;
@@ -239,8 +239,8 @@ public abstract class AlphaVector implements Serializable{
 				while( iter.hasNext() ){
 					e =  iter.next();
 					iState = e.getKey().intValue();//×´Ì¬
-					dProb = e.getValue().doubleValue();//ÔÚ¸Ã×´Ì¬µÄ¸ÅÂÊ
-					dValue = valueAt( iState );//ÔÚ¸Ã×´Ì¬µÄÖµ
+					dProb = e.getValue().doubleValue();//ï¿½Ú¸ï¿½×´Ì¬ï¿½Ä¸ï¿½ï¿½ï¿½
+					dValue = valueAt( iState );//ï¿½Ú¸ï¿½×´Ì¬ï¿½ï¿½Öµ
 					dSum += dValue * dProb;
 				}
 			}

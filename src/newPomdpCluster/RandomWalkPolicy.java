@@ -1,8 +1,8 @@
-package pomdp;
+package newPomdpCluster;
 
-import pomdp.algorithms.PolicyStrategy;
-import pomdp.utilities.BeliefState;
-import pomdp.utilities.RandomGenerator;
+import newPomdpCluster.algorithms.PolicyStrategy;
+import newPomdpCluster.utilities.BeliefState;
+import newPomdpCluster.utilities.RandomGenerator;
 
 /**
  * @author shanigu

@@ -4,7 +4,7 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import pomdp.utilities.datastructures.PriorityQueueElement;
+import newPomdpCluster.utilities.datastructures.PriorityQueueElement;
 
 
 public abstract class BeliefState extends PriorityQueueElement implements Serializable{
@@ -128,7 +128,7 @@ public abstract class BeliefState extends PriorityQueueElement implements Serial
 
 	
 	/**
-	 * ¼ÆËã³öÏÂÒ»¸öÐÅÄîµã
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param iAction
 	 * @param iObservation
 	 * @return
@@ -142,7 +142,7 @@ public abstract class BeliefState extends PriorityQueueElement implements Serial
 			if( pEntry == null ){
 				bsNext = getBeliefStateFactory().nextBeliefState( this, iAction, iObservation );
 				if( ( bsNext != null ) && ( getBeliefStateFactory().isCachingBeliefStates() ) )
-					addSuccessor( iAction, iObservation, bsNext );//Ìí¼Óµ½ºó¼Ìµã¼¯ºÏÖÐ
+					addSuccessor( iAction, iObservation, bsNext );//ï¿½ï¿½Óµï¿½ï¿½ï¿½Ìµã¼¯ï¿½ï¿½ï¿½ï¿½
 			}
 			else{
 				bsNext = (BeliefState) pEntry.m_first;

@@ -1,4 +1,4 @@
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,12 +9,12 @@ public class BeliefStateVector<E> extends Vector<E>
 	private static final long serialVersionUID = 1L;
     
 	/**
-	 * 0£º¸ù    1£ºµÚÒ»²ã    2£ºµÚ¶þ²ã
+	 * 0ï¿½ï¿½ï¿½ï¿½    1ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½    2ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½
 	 */
 	private ArrayList<ArrayList<E>> treeLevelInfo = null;
 	
 	/**
-	 * Èç¹ûÖ»´æ·ÅÐÂµÄb£¬ÄÇÃ´ÍêÕûµÄtreeÐÅÏ¢£¬¾Í·ÅÔÚÕâ
+	 * ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Âµï¿½bï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½treeï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private ArrayList<ArrayList<E>> treeLevelInfoComplete = null;
 	
@@ -51,7 +51,7 @@ public class BeliefStateVector<E> extends Vector<E>
 	public synchronized void add(E parent, E current)
 	{
 		super.add(current);
-		//Îª¸ù
+		//Îªï¿½ï¿½
 		if(parent==null)
 		{
 			treeLevelInfo.clear();
@@ -59,18 +59,18 @@ public class BeliefStateVector<E> extends Vector<E>
 			treeLevelInfo.add(levelOne);
 			levelOne.add(current);
 		}
-		else//·Ç¸ù
+		else//ï¿½Ç¸ï¿½
 		{
 			int pLevelNum = getLevelNum(parent);
-			if(pLevelNum<0)//parent²»´æÔÚ,ÕâÑùÎÞ·¨Ìí¼Ó
+			if(pLevelNum<0)//parentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½
 			{
 				Logger.getInstance().logln("Error: BeliefStateVector.add(E parent, E current): parent not exist!");
 		        return;
 			}
-			else// parentÕý³£
+			else// parentï¿½ï¿½
 			{
 				pLevelNum += 1;
-				if(treeLevelInfo.size()<=pLevelNum)//ÐèÒªÐÂÔöÒ»²ã
+				if(treeLevelInfo.size()<=pLevelNum)//ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 				{
 					ArrayList<E> newLevel = new ArrayList<E>();
 					treeLevelInfo.add(newLevel);
@@ -80,7 +80,7 @@ public class BeliefStateVector<E> extends Vector<E>
 						treeLevelInfoComplete.add(newLevel2);
 					}
 				}
-				treeLevelInfo.get(pLevelNum).add(current);//ÕÒµ½²ãÔÙÌí¼Ó
+				treeLevelInfo.get(pLevelNum).add(current);//ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if(notComplete)
 				{
 					treeLevelInfoComplete.get(pLevelNum).add(current);
@@ -90,7 +90,7 @@ public class BeliefStateVector<E> extends Vector<E>
 	}
 	
 	/**
-	 * ²éÑ¯Ò»¸öbµÄ²ãÊý
+	 * ï¿½ï¿½Ñ¯Ò»ï¿½ï¿½bï¿½Ä²ï¿½ï¿½ï¿½
 	 * 
 	 * @param e
 	 * @return -1: not found
@@ -121,7 +121,7 @@ public class BeliefStateVector<E> extends Vector<E>
 	}
 	
 	/**
-	 * »ñµÃÒ»¸öÔÚtreeÉÏ£¬´ÓÏÂÍùÉÏÉ¨ÃèµÄiterator
+	 * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½treeï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¨ï¿½ï¿½ï¿½iterator
 	 * 
 	 * @return
 	 */
@@ -130,7 +130,7 @@ public class BeliefStateVector<E> extends Vector<E>
 		ArrayList<E> resultList = new ArrayList<E>();
 		for (int i = treeLevelInfo.size() - 1; i >= 0; i--) 
 		{
-			resultList.addAll(treeLevelInfo.get(i));//addAll(E),ÕâÀïEÊÇÒ»¸ö¼¯ºÏ,ÄÇÃ´»á½«EÖÐËùÓÐµÄÔªËØ¶¼¼ÓÈëlistÖÐ
+			resultList.addAll(treeLevelInfo.get(i));//addAll(E),ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ã´ï¿½á½«Eï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ôªï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½listï¿½ï¿½
 		}
 		return resultList.iterator();
 	}

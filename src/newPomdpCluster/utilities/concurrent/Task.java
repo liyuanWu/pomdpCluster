@@ -1,8 +1,8 @@
-package pomdp.utilities.concurrent;
+package newPomdpCluster.utilities.concurrent;
 
 import java.io.Serializable;
 
-import pomdp.environments.POMDP;
+import newPomdpCluster.environments.POMDP;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

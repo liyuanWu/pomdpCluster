@@ -1,3 +1,5 @@
+package oldPomdpCluster;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -73,7 +75,7 @@ public class UtilClass {
 
             int obv = randObv(pointNow,fsc,model);
 //            System.out.println(sumForB(pointNow));
-//            Model.printPoint(pointNow);
+//            oldPomdpCluster.Model.printPoint(pointNow);
 
 
 //            int  idx=0;
@@ -91,14 +93,14 @@ public class UtilClass {
 //            }
 //            if(idx==0||idx==1||idx==2||idx==3||idx==16||idx==17||idx==18||idx==19){
 //                count--;
-////                sumReward+=PomdpSolver.vecMultiply(pointNow,model.reward.get(action));
-//                sumReward+=PomdpSolver.vecMultiply(pointNow,ms.vec);
+////                sumReward+=oldPomdpCluster.PomdpSolver.vecMultiply(pointNow,model.reward.get(action));
+//                sumReward+=oldPomdpCluster.PomdpSolver.vecMultiply(pointNow,ms.vec);
 ////                System.out.println(count);
 //                return sumReward;
 //            }
 
 
-//            sumReward+=gama*PomdpSolver.vecMultiply(pointNow,ms.vec);
+//            sumReward+=gama*oldPomdpCluster.PomdpSolver.vecMultiply(pointNow,ms.vec);
             sumReward+=gama*PomdpSolver.vecMultiply(pointNow,model.reward.get(action));
             gama=gama*0.95;
 
@@ -141,10 +143,10 @@ public class UtilClass {
         return point;
     }
 
-//    public static double ADR(List<double[]> pointList,ArrayList<MachineState> fsc){
+//    public static double ADR(List<double[]> pointList,ArrayList<oldPomdpCluster.MachineState> fsc){
 //        double sum=0;
 //        for(double[] point: pointList){
-//            sum+=PomdpSolver.vecMultiply(point,fsc.get(PomdpSolver.getMaxValueMachineStateIDX(fsc,point)).vec);
+//            sum+=oldPomdpCluster.PomdpSolver.vecMultiply(point,fsc.get(oldPomdpCluster.PomdpSolver.getMaxValueMachineStateIDX(fsc,point)).vec);
 //        }
 //        return sum/pointList.size();
 //    }
@@ -181,7 +183,7 @@ public class UtilClass {
         double randret = rand.nextDouble()*sum;
         double tempSum=0;
 //        System.out.print("p:");
-//        Model.printPoint(p);
+//        oldPomdpCluster.Model.printPoint(p);
         for(int i=0;i<p.length;i++){
 
             if(randret>=tempSum&&randret<=tempSum+p[i])
@@ -199,7 +201,7 @@ public class UtilClass {
 
 
     }
-//    public static int simpleRandObv(double[] point,ArrayList<MachineState> fsc,Model model){
+//    public static int simpleRandObv(double[] point,ArrayList<oldPomdpCluster.MachineState> fsc,oldPomdpCluster.Model model){
 //        Random rand = new Random();
 //        int sIdx =-1;
 //        double val=0;
@@ -210,7 +212,7 @@ public class UtilClass {
 //            }
 //        }
 //        double sum=0;
-//        MachineState ms = fsc.get(PomdpSolver.getMaxValueMachineStateIDX(fsc,point));
+//        oldPomdpCluster.MachineState ms = fsc.get(oldPomdpCluster.PomdpSolver.getMaxValueMachineStateIDX(fsc,point));
 //        for(int i=0;i<model.observations;i++){
 //            if()
 //        }
@@ -230,7 +232,7 @@ public class UtilClass {
 //                0.011363,0.011363,0.011363,0.011363,0.011363,0.011363,0.011363};
 
         ArrayList<MachineState> result= readFSC("pbpi-tg-1.out");
-      //  ArrayList<MachineState> result= readFSC("cluster-tg-1.out");
+      //  ArrayList<oldPomdpCluster.MachineState> result= readFSC("cluster-tg-1.out");
         double ave =nTimesTryAve(10, 200, result, firstPoint, "tiger-grid.POMDP");
         System.out.println(ave);
 
@@ -238,10 +240,10 @@ public class UtilClass {
 
 
 
-//        PomdpSolver ps = new PomdpSolver();
+//        oldPomdpCluster.PomdpSolver ps = new oldPomdpCluster.PomdpSolver();
 //        try {
 //            ps.initFSC(new File("tiger-grid.POMDP"),new File("pointset-tiger-grid"));
-//            ArrayList<MachineState> result= readFSC("result.out");
+//            ArrayList<oldPomdpCluster.MachineState> result= readFSC("result.out");
 //            double sum = 0;
 //            double temp=0;
 //            for(double[] point:ps.pointList){

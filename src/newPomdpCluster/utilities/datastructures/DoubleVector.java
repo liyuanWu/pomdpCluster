@@ -1,6 +1,6 @@
-package pomdp.utilities.datastructures;
+package newPomdpCluster.utilities.datastructures;
 
-import pomdp.utilities.Logger;
+import newPomdpCluster.utilities.Logger;
 
 public class DoubleVector extends VectorBase{
 

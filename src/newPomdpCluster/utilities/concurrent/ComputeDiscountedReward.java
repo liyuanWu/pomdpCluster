@@ -1,20 +1,9 @@
-package pomdp.utilities.concurrent;
-
-import java.util.Vector;
+package newPomdpCluster.utilities.concurrent;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
-import pomdp.algorithms.PolicyStrategy;
-import pomdp.environments.POMDP;
-import pomdp.environments.POMDP.RewardType;
-import pomdp.utilities.AlphaVector;
-import pomdp.utilities.BeliefState;
-import pomdp.utilities.BeliefStateFactory;
-import pomdp.utilities.Logger;
-import pomdp.utilities.RandomGenerator;
-import pomdp.valuefunction.LinearValueFunctionApproximation;
+import newPomdpCluster.valuefunction.LinearValueFunctionApproximation;
 
 public class ComputeDiscountedReward extends Task {
 

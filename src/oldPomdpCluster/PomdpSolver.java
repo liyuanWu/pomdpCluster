@@ -1,5 +1,7 @@
-import dbscan.Dbscan;
-import dbscan.Point;
+package oldPomdpCluster;
+
+import oldPomdpCluster.dbscan.Dbscan;
+import oldPomdpCluster.dbscan.Point;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +45,7 @@ public class PomdpSolver {
 
         model.initModelFromFileForHallWay(modelfile);
 
-        //for spped up test.
+        //for spped up oldPomdpCluster.test.
         model.initInerArray();
 
 //        model.initModelFromFile(modelfile);
@@ -79,7 +81,7 @@ public class PomdpSolver {
                 double[] nextPoint;
 //                try {
 //                    nextPoint = model.nextPoint(tp, action, k);
-//                } catch (NextPointNotExistException e) {
+//                } catch (oldPomdpCluster.NextPointNotExistException e) {
 //                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 //                    continue;
 //                }
@@ -186,7 +188,7 @@ public class PomdpSolver {
 
     public ArrayList<MachineState> findOptimalPolicyWithPBPI(double gama, double[] startPoint) {
         ArrayList<MachineState> fore = fsc;
-//        ArrayList<MachineState> rear = PI(fore,gama);
+//        ArrayList<oldPomdpCluster.MachineState> rear = PI(fore,gama);
         ArrayList<MachineState> rear = PBPI(fore, gama, startPoint);
 
         while (!convergenceForPBPI(rear,0.01)){//||bSet.size()<model.states) {
@@ -194,7 +196,7 @@ public class PomdpSolver {
 //            fore = rear;
 //            rear = PI(rear,gama);
             rear = PBPI(rear, gama, startPoint);
-            //System.out.println(UtilClass.ADR(pointList,rear));
+            //System.out.println(oldPomdpCluster.UtilClass.ADR(pointList,rear));
 
         }
         completeLink(rear);
@@ -333,7 +335,7 @@ public class PomdpSolver {
     public ArrayList<MachineState> findOptimalPolicy(double gama) {
         ArrayList<MachineState> fore = this.fsc;
 
-//        ArrayList<MachineState> rear = PI(fore,gama);
+//        ArrayList<oldPomdpCluster.MachineState> rear = PI(fore,gama);
         ArrayList<MachineState> rear = fore;//clusterPI(fore, gama);
         //System.out.println("pointListSize:"+clusterPointList.size());
 
@@ -564,12 +566,12 @@ public class PomdpSolver {
 //        newVecList.addAll(th);
 //
 //        //把原fsc的向量放入newVecList中
-//        for (MachineState aFsc : fsc) {
+//        for (oldPomdpCluster.MachineState aFsc : fsc) {
 //            newVecList.add(aFsc.vec);
 //        }
 //
 //
-//        ArrayList<MachineState> newMSList;
+//        ArrayList<oldPomdpCluster.MachineState> newMSList;
 //        newMSList = makeMSListFromVec(newVecList);
 //        getPointsGrouped(newMSList);
 //        deleteMSwithNoPoint(newMSList);
@@ -670,7 +672,7 @@ public class PomdpSolver {
         for (int transToStateIdx = 0; transToStateIdx < model.states; transToStateIdx++) {
 
             for (int observ = 0; observ < model.observations; observ++) {
-                double[] nextPoint = bp.actionList.get(action).get(observ);//Model.nextPointForHallwayStatic(model, point, action, observ);
+                double[] nextPoint = bp.actionList.get(action).get(observ);//oldPomdpCluster.Model.nextPointForHallwayStatic(model, point, action, observ);
                 if (new Double(nextPoint[0]).isNaN()) continue;
 
                 result += model.transArray[action][stateIdx][transToStateIdx]

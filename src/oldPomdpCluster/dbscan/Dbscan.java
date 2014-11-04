@@ -1,4 +1,4 @@
-package dbscan;
+package oldPomdpCluster.dbscan;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +18,7 @@ public class Dbscan {
     public static List<List<Point>> resultList=new ArrayList<List<Point>>();//存储最后的聚类结果
 
     public static void applyDbscan(String pointsetPath) throws IOException{
-        //e:\pomdp\src\dbscan\
+        //e:\pomdp\src\oldPomdpCluster.dbscan\
         pointsList=Utility.getPointsList(pointsetPath);
         System.out.println(pointsList.size());
         for(int index=0;index<pointsList.size();++index){
@@ -48,7 +48,7 @@ public class Dbscan {
     public static void newapplyDbscan(String pointsetPath,double newe,int newminp) throws IOException{
         Dbscan.e=newe;
         Dbscan.minp=newminp;
-        //e:\pomdp\src\dbscan\
+        //e:\pomdp\src\oldPomdpCluster.dbscan\
         pointsList=Utility.getPointsList(pointsetPath);
         for(int index=0;index<pointsList.size();++index){
             List<Point> tmpLst=new ArrayList<Point>();

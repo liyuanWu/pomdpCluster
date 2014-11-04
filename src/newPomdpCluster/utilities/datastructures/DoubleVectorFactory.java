@@ -1,4 +1,4 @@
-package pomdp.utilities.datastructures;
+package newPomdpCluster.utilities.datastructures;
 
 public class DoubleVectorFactory extends VectorFactory<DoubleVector> {
 	public DoubleVectorFactory(){

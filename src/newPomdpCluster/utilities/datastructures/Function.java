@@ -1,4 +1,4 @@
-package pomdp.utilities.datastructures;
+package newPomdpCluster.utilities.datastructures;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -50,8 +50,8 @@ public abstract class Function implements Serializable {
 	public abstract void setValue( int arg1, int arg2, double dValue );
 	
 	/**
-	 * ÓÃÓÚÔö¼ÓTransition FunctionµÄÒ»¸ö×ª»»
-	 * ²ÎÊý£ºiStartState, iActionIdx, iEndState, dValue)
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Transition Functionï¿½ï¿½Ò»ï¿½ï¿½×ªï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½iStartState, iActionIdx, iEndState, dValue)
 	 * @param arg1
 	 * @param arg2
 	 * @param arg3
@@ -59,7 +59,7 @@ public abstract class Function implements Serializable {
 	 */
 	public abstract void setValue( int arg1, int arg2, int arg3, double dValue );
 	/**
-	 *  »ñµÃºÍ¿ªÊ¼×´Ì¬ºÍ¶¯×÷ÓÐ¹ØµÄ¸ÅÂÊ·Ç0µÄ×ª»»
+	 *  ï¿½ï¿½ÃºÍ¿ï¿½Ê¼×´Ì¬ï¿½Í¶ï¿½ï¿½ï¿½ï¿½Ð¹ØµÄ¸ï¿½ï¿½Ê·ï¿½0ï¿½ï¿½×ªï¿½ï¿½
 	 * @param arg1
 	 * @param arg2
 	 * @return
@@ -80,10 +80,10 @@ public abstract class Function implements Serializable {
 	}
 	
 	/**
-	 * ÓÃÓÚÔö¼ÓO FunctionµÄÒ»¸ö¹Û²ìÖµ¸ÅÂÊ
-	 * ×îÖÕ¾ùµ÷ÓÃsetValue( iParam1, iParam2, iParam3, dValue )
-	 * ×îÖÕ´æÈëSparseTabularFunction.HashMap<Integer,Double>[][]
-	 * ²ÎÊý£ºiAction, iEndState, iObservation, dValue 
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½O Functionï¿½ï¿½Ò»ï¿½ï¿½ï¿½Û²ï¿½Öµï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½setValue( iParam1, iParam2, iParam3, dValue )
+	 * ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½SparseTabularFunction.HashMap<Integer,Double>[][]
+	 * ï¿½ï¿½ï¿½ï¿½iAction, iEndState, iObservation, dValue 
 	 * 
 	 * aDims[0] = m_cActions;
 	 * aDims[1] = m_cStates;
@@ -96,7 +96,7 @@ public abstract class Function implements Serializable {
 	 */
 	public void setAllValues( int iParam1, int iParam2, int iParam3, double dValue ){
 		int cParam1 = m_aDims[0];//m_cActions
-		//iAction, iEndState, iObservation¶¼ÊÇÈÎÒâ
+		//iAction, iEndState, iObservationï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if( iParam1 == -1 && iParam2 == -1 && iParam3 == -1 )
 		{
 			int cParam2 = m_aDims[1], cParam3 = m_aDims[2]; //m_cStates m_cObservations
@@ -107,10 +107,10 @@ public abstract class Function implements Serializable {
 			return;
 		
 		}
-		//iActionÈÎÒâ
+		//iActionï¿½ï¿½ï¿½ï¿½
 		if( iParam1 == -1 ){
 			for( iParam1 = 0 ; iParam1 < cParam1 ; iParam1++ ){
-				//iEndStateÈÎÒâ
+				//iEndStateï¿½ï¿½ï¿½ï¿½
 				if( iParam2 == -1 ){
 					setAllValues( iParam1, iParam3, dValue );
 				}
@@ -120,7 +120,7 @@ public abstract class Function implements Serializable {
 			}
 		}
 		else{
-			//iEndStateÈÎÒâ
+			//iEndStateï¿½ï¿½ï¿½ï¿½
 			if( iParam2 == -1 ){
 				setAllValues( iParam1, iParam3, dValue );
 			}

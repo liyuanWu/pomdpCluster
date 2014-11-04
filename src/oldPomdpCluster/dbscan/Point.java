@@ -1,4 +1,4 @@
-package dbscan;
+package oldPomdpCluster.dbscan;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package pomdp.algorithms;
+package newPomdpCluster.algorithms;
 /*
  * Created on May 6, 2005
  *
@@ -17,13 +17,13 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map.Entry;
 
-import pomdp.environments.POMDP;
-import pomdp.utilities.AlphaVector;
-import pomdp.utilities.BeliefState;
-import pomdp.utilities.Logger;
-import pomdp.utilities.RandomGenerator;
-import pomdp.valuefunction.LinearValueFunctionApproximation;
-import pomdp.valuefunction.MDPValueFunction;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.AlphaVector;
+import newPomdpCluster.utilities.BeliefState;
+import newPomdpCluster.utilities.Logger;
+import newPomdpCluster.utilities.RandomGenerator;
+import newPomdpCluster.valuefunction.LinearValueFunctionApproximation;
+import newPomdpCluster.valuefunction.MDPValueFunction;
 
 public abstract class ValueIteration extends PolicyStrategy{
 	protected MDPValueFunction m_vfMDP;
@@ -37,7 +37,7 @@ public abstract class ValueIteration extends PolicyStrategy{
 	protected final static double MIN_INF = Double.NEGATIVE_INFINITY;
 	protected final static double MAX_INF = Double.POSITIVE_INFINITY;
 	protected boolean m_bConverged;
-	//¦Å 0.001
+	//ï¿½ï¿½ 0.001
 	protected double m_dEpsilon = 0.001;
 	protected long m_cElapsedExecutionTime;
 	protected long m_cCPUExecutionTime;
@@ -53,7 +53,7 @@ public abstract class ValueIteration extends PolicyStrategy{
 	protected static int g_cTrials = 500;
 	protected static int g_cStepsPerTrial = 100;
 	
-	//Ã»ÓÐÓÃµ½µÄ±äÁ¿¡£Ã»ÓÐµØ·½À´ÉèÖÃËü
+	//Ã»ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ÐµØ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	protected static String m_sBlindPolicyValueFunctionFileName = null;
 	
 	protected RandomGenerator m_rndGenerator;	
@@ -79,10 +79,10 @@ public abstract class ValueIteration extends PolicyStrategy{
 		
 		m_bTerminate = false;
 		
-		//½öËæ»úÊýÉú³ÉÆ÷
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		m_rndGenerator = new RandomGenerator( "ValueIteration" );
 		
-		//m_dEpsilon: ¦Å 0.001
+		//m_dEpsilon: ï¿½ï¿½ 0.001
 		m_vValueFunction = new LinearValueFunctionApproximation( m_dEpsilon, true );
 		m_vfMDP = pomdp.getMDPValueFunction();
 
@@ -100,27 +100,27 @@ public abstract class ValueIteration extends PolicyStrategy{
 		BeliefState bsSuccessor = null;
 		
 		boolean bCache = m_pPOMDP.getBeliefStateFactory().isCachingBeliefStates();
-		for( iObservation = 0 ; iObservation < m_cObservations ; iObservation++ ){//µü´úÃ¿Ò»¸ö¹Û²ì£¬»ñµÃ×î´óÆÚÍûÖµ£¬²»°üÀ¨Á¢¼´»Ø±¨Öµ
-			dProb = bs.probabilityOGivenA( iAction, iObservation );//¼ÆËãÖ´ÐÐ¶¯×÷aµÃµ½¹Û²ìoµÄ¸ÅÂÊ
+		for( iObservation = 0 ; iObservation < m_cObservations ; iObservation++ ){//ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½Û²ì£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Öµ
+			dProb = bs.probabilityOGivenA( iAction, iObservation );//ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð¶ï¿½ï¿½ï¿½aï¿½Ãµï¿½ï¿½Û²ï¿½oï¿½Ä¸ï¿½ï¿½ï¿½
 			dSumProbs += dProb;
 			if( dProb > 0.0 ){
-				bsSuccessor = bs.nextBeliefState( iAction, iObservation );//¼ÆËãb¡¢a¡¢oµÄºó¼ÌÐÅÄîµã
-				avAlpha = vValueFunction.getMaxAlpha( bsSuccessor );//ºó¼ÌÐÅÄîµãÔÚÖµº¯ÊýÖÐÖµ×î´óÊ±Ëù¶ÔÓ¦µÄÏòÁ¿
-				dValue = avAlpha.dotProduct( bsSuccessor );//ºó¼ÌÐÅÄîµãÔÚÖµº¯ÊýÖÐ¶ÔÓ¦µÄ×î´óÖµ
-				dSumValues += dValue * dProb;//¼ÓÈ¨ÇóºÍ
+				bsSuccessor = bs.nextBeliefState( iAction, iObservation );//ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aï¿½ï¿½oï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				avAlpha = vValueFunction.getMaxAlpha( bsSuccessor );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				dValue = avAlpha.dotProduct( bsSuccessor );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+				dSumValues += dValue * dProb;//ï¿½ï¿½È¨ï¿½ï¿½ï¿½
 			}
 			else{
 				avAlpha = vValueFunction.getLast();
 			}
-			aNext[iObservation] = avAlpha;//Ã¿Ò»¸ö0µü´úÒ»²¿ÒÔºó¶ÔÓ¦µÄ×î´óÏòÁ¿
+			aNext[iObservation] = avAlpha;//Ã¿Ò»ï¿½ï¿½0ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ôºï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			
 		}
 		
 		//Ê½F10
-		//ºÍ±ê×¼backupÖÐµÄÊ½×Ó²»Ò»Ñù
+		//ï¿½Í±ï¿½×¼backupï¿½Ðµï¿½Ê½ï¿½Ó²ï¿½Ò»ï¿½ï¿½
 		dSumValues /= dSumProbs; //in case due to rounding there is an error and probs do not exactly sum to 1
 		dSumValues *= m_pPOMDP.getDiscountFactor();
-		dSumValues += m_pPOMDP.immediateReward( bs, iAction ); //¼ÓÉÏÁ¢¼´»Ø±¨
+		dSumValues += m_pPOMDP.immediateReward( bs, iAction ); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½
 		
 		m_pPOMDP.getBeliefStateFactory().cacheBeliefStates( bCache );
 		
@@ -131,7 +131,7 @@ public abstract class ValueIteration extends PolicyStrategy{
 		AlphaVector avAlpha = null, avG = null, avSum = null, avResult = null;
 		int iObservation = 0;
 		
-		//±éÀúo£¬°Ñ¦ÁÏà¼Ó
+		//ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Ñ¦ï¿½ï¿½ï¿½ï¿½
 		for( iObservation = 0 ; iObservation < m_cObservations ; iObservation++ ){
 			avAlpha = aNext[iObservation];
 			avG = avAlpha.G( iAction, iObservation );
@@ -142,7 +142,7 @@ public abstract class ValueIteration extends PolicyStrategy{
 				avSum.accumulate( avG );
 		}
 		
-		//Ôö¼ÓÁ¢¼´»Ø±¨
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½
 		avResult = avSum.addReward( iAction );
 		avResult.setAction( iAction );
 
@@ -164,12 +164,12 @@ public abstract class ValueIteration extends PolicyStrategy{
 		int iAction = 0, iMaxAction = -1;
 		AlphaVector[] aNext = null, aBest = null;
 	
-		Vector<AlphaVector[]> vWinners = new Vector<AlphaVector[]>();//¿ÉÄÜÒòÎªÏàÍ¬£¬¶øÓÐ¶à¸ö£¬ËùÓÐÅª¸övector
-		Vector<Integer> vWinnersActions = new Vector<Integer>();//×îÓÅaction
+		Vector<AlphaVector[]> vWinners = new Vector<AlphaVector[]>();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åªï¿½ï¿½vector
+		Vector<Integer> vWinnersActions = new Vector<Integer>();//ï¿½ï¿½ï¿½ï¿½action
 	
-		for( iAction = 0 ; iAction < m_cActions ; iAction++ ){//Ã¿¸öaction×îÓÅ¦Á
-			aNext = new AlphaVector[m_cObservations];//aNext´æ·ÅÓÉb¡¢a¡¢V£¬ÕÒµ½Ã¿¸öo¶ÔÓ¦µÄ×î´ó¦Á
-				//·µ»ØÖµÎªF10£¬ÀàËÆb¡¢a¹Ì¶¨Ê±£¬µü´úÒ»²½ºó¼ÆËãµÃµ½µÄ×î´óvalue£¬ÔÚÃ¿¸öoµü´úÒ»²½ºó¶ÔÓ¦µÄ×î´ó¦ÁÌõ¼þÏÂ
+		for( iAction = 0 ; iAction < m_cActions ; iAction++ ){//Ã¿ï¿½ï¿½actionï¿½ï¿½ï¿½Å¦ï¿½
+			aNext = new AlphaVector[m_cObservations];//aNextï¿½ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aï¿½ï¿½Vï¿½ï¿½ï¿½Òµï¿½Ã¿ï¿½ï¿½oï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//ï¿½ï¿½ï¿½ï¿½ÖµÎªF10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aï¿½Ì¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½valueï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½oï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			dValue = findMaxAlphas( iAction, bs, vValueFunction, aNext );
 			
 			if( dValue > dMaxValue ){
@@ -178,19 +178,19 @@ public abstract class ValueIteration extends PolicyStrategy{
 				vWinnersActions.clear();
 			}
 			if( dValue == dMaxValue ){
-				aBest = aNext;//aBest·ÅµÄÊÇ×î¼Ñaction¶ÔÓ¦µÄaNext
-		                      //b¡¢a¡¢o¹Ì¶¨Ê±£¬×î¼ÑactionÏÂ£¬Ã¿¸öoµü´úÒ»²½ºó¶ÔÓ¦µÄ×î´ó¦Á
+				aBest = aNext;//aBestï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½actionï¿½ï¿½Ó¦ï¿½ï¿½aNext
+		                      //bï¿½ï¿½aï¿½ï¿½oï¿½Ì¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½actionï¿½Â£ï¿½Ã¿ï¿½ï¿½oï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				iMaxAction = iAction;
-				vWinners.add( aBest );//¼ÇÂ¼È¡Öµ×î´óµÄ¶¯×÷Ëù¶ÔÓ¦µÄÏòÁ¿
-				vWinnersActions.add( iMaxAction );//¼ÇÂ¼È¡Öµ×î´óµÄ¶¯×÷
+				vWinners.add( aBest );//ï¿½ï¿½Â¼È¡Öµï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				vWinnersActions.add( iMaxAction );//ï¿½ï¿½Â¼È¡Öµï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
 			}
 		}
 		
-		//Èç¹ûÓÐ¶à¸ö×î¼Ñaction£¬Ëæ»úÈ¡Ò»¸ö
+		//ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½actionï¿½ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½
 		int idx = m_rndGenerator.nextInt( vWinners.size() );
 		aBest = vWinners.elementAt( idx );
 		iMaxAction = vWinnersActions.elementAt( idx );
-		//¼ÆËã³ö¸üÐÂºóµÄ¦Á
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âºï¿½Ä¦ï¿½
 		AlphaVector avMax = G( iMaxAction, vValueFunction, aBest );
 		avMax.setWitness( bs );
 		
@@ -200,7 +200,7 @@ public abstract class ValueIteration extends PolicyStrategy{
 		return m_pPOMDP.getMaxMinR();
 	}
 	
-	//Ê¹ÓÃblind²ßÂÔ£¬³õÊ¼»¯Öµº¯ÊýV LinearValueFunctionApproximation
+	//Ê¹ï¿½ï¿½blindï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½V LinearValueFunctionApproximation
 	protected void initValueFunctionUsingBlindPolicy(){
 		m_vValueFunction.clear();
 		
@@ -212,10 +212,10 @@ public abstract class ValueIteration extends PolicyStrategy{
 		Entry<Integer,Double> entry = null;
 		Iterator<Entry<Integer,Double>> itNonZero = null;
 		LinearValueFunctionApproximation vMin = new LinearValueFunctionApproximation( m_dEpsilon, false );
-		//³õÊ¼»¯Îª×îÐ¡Öµ
+		//ï¿½ï¿½Ê¼ï¿½ï¿½Îªï¿½ï¿½Ð¡Öµ
 		initValueFunctionToMin( vMin );
 		
-		//»ñµÃ×´Ì¬¸ÅÂÊ¾ùÒ»ÖÂµÄb
+		//ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ê¾ï¿½Ò»ï¿½Âµï¿½b
 		BeliefState bsUniform = m_pPOMDP.getBeliefStateFactory().getUniformBeliefState();
 		
 		if( m_sBlindPolicyValueFunctionFileName != null ){
@@ -230,43 +230,43 @@ public abstract class ValueIteration extends PolicyStrategy{
 		}
 		Logger.getInstance().logln( "Begin blind policy computation  " + m_cActions + " actions" );
 		
-		//MDPÖµµü´úÖÁÊÕÁ²£¡£¡£¡
-		//±éÀúaction
-		//¼ÆËãF3£¬¶ÔÃ¿¸östateµÄÖµ£¬È¡×î´óµÄ£¬²¢¼ÇÂ¼¶ÔÓ¦µÄaction
+		//MDPÖµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½action
+		//ï¿½ï¿½ï¿½ï¿½F3ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½stateï¿½ï¿½Öµï¿½ï¿½È¡ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ó¦ï¿½ï¿½action
 		for( iAction = 0 ; iAction < m_cActions ; iAction++ ){
-			//¼ÆËãF2£¬MDP£¬Ä³actionÏÂ£¬¶ÔËùÓÐstate½øÐÐÖµµü´úÖÁÊÕÁ²
-			av = vMin.elementAt( 0 ); //È¡³öµÚÒ»¸ö¦Á£¬ÆäÊµ¾ÍÖ»ÓÐÒ»¸ö¦Á
+			//ï¿½ï¿½ï¿½ï¿½F2ï¿½ï¿½MDPï¿½ï¿½Ä³actionï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½stateï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			av = vMin.elementAt( 0 ); //È¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 			//av = m_pPOMDP.newAlphaVector();
 			//Logger.getInstance().logln( "Initial " + av );
 			iIteration = 0;
 			dMaxResidual = MAX_INF;
-			//³ÖÐøµü´úÖÁÊÕÁ²£¬¼´µü´úÇ°ºó×î´óvalueµÄ²îÖµ£¬<=0.1
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½valueï¿½Ä²ï¿½Öµï¿½ï¿½<=0.1
 			while( dMaxResidual > 0.1 ){
 				avNext = av.newAlphaVector();
 				dMaxDiff = 0.0;
-				//±éÀústate
-				//MDP£¬¶ÔËùÓÐ×´Ì¬½øÐÐÒ»²½Öµµü´ú£¬È»ºó°Ñµü´úºóÖµ£¬´æÈëÐÂ¦Á avNext
+				//ï¿½ï¿½ï¿½ï¿½state
+				//MDPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Öµï¿½ï¿½ï¿½È»ï¿½ï¿½Ñµï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¦ï¿½ avNext
 				//state 1
 				for( iState = 0 ; iState < m_cStates ; iState++ ){
-					//-------¼ÆËãF1£¨S£©£¬MDPÖÐÒ»²½Öµµü´ú
+					//-------ï¿½ï¿½ï¿½ï¿½F1ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½MDPï¿½ï¿½Ò»ï¿½ï¿½Öµï¿½ï¿½ï¿½
 					dSum = 0.0;
-					//»ñµÃÒÔÕâ¸östate action¿ªÊ¼µÄ×ª»»
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½state actionï¿½ï¿½Ê¼ï¿½ï¿½×ªï¿½ï¿½
 					//state2
 					itNonZero = m_pPOMDP.getNonZeroTransitions( iState, iAction );
 					while( itNonZero.hasNext() ){
 						entry = itNonZero.next();
 						iEndState = entry.getKey().intValue();
-						dTr = entry.getValue().doubleValue();//×ª»»µÄ¸ÅÂÊÖµ
-						dValue = av.valueAt( iEndState );//¦ÁÔÚÕâ¸ö×´Ì¬µÄµÄvalue
+						dTr = entry.getValue().doubleValue();//×ªï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Öµ
+						dValue = av.valueAt( iEndState );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Äµï¿½value
 						dSum += dTr * dValue;//
 					}
 					dReward = m_pPOMDP.R( iState, iAction );
 					dNewValue = dReward + dSum * m_dGamma;
 					//-------
-					//°ÑMDP¶ÔÒ»¸östateµÄÒ»²½µü´úºóÖµ´æÈëÐÂµÄ¦Á
+					//ï¿½ï¿½MDPï¿½ï¿½Ò»ï¿½ï¿½stateï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ¦ï¿½
 					avNext.setValue( iState, dNewValue );
 					
-					//¸üÐÂÒ»²½µü´úºó£¬²îÖµ×î´óµÄstate
+					//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬²ï¿½Öµï¿½ï¿½ï¿½ï¿½state
 					dDiff = Math.abs( dNewValue - av.valueAt( iState ) );
 					if( dDiff > dMaxDiff ){
 						dMaxDiff = dDiff;
@@ -275,7 +275,7 @@ public abstract class ValueIteration extends PolicyStrategy{
 				
 				dMaxResidual = dMaxDiff;
 				avNext.finalizeValues();
-				//ÐÂ¦ÁÌæ´úÀÏ¦Á
+				//ï¿½Â¦ï¿½ï¿½ï¿½ï¿½ï¿½Ï¦ï¿½
 				av = avNext;
 				
 				iIteration++;
@@ -285,8 +285,8 @@ public abstract class ValueIteration extends PolicyStrategy{
 			}
 						
 			av.setWitness( bsUniform );
-			av.setAction( iAction );//ÉèÖÃ¶ÔÓ¦µÄaction
-			m_vValueFunction.addPrunePointwiseDominated( av );//ÕâÀï»áÈ¡³öÖµ×î´óµÄ¦Á
+			av.setAction( iAction );//ï¿½ï¿½ï¿½Ã¶ï¿½Ó¦ï¿½ï¿½action
+			m_vValueFunction.addPrunePointwiseDominated( av );//ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Öµï¿½ï¿½ï¿½Ä¦ï¿½
 			Logger.getInstance().logln( "Done action " + iAction +
 					" after " + iIteration + " iterations |V| = " + m_vValueFunction.size() );
 		}		

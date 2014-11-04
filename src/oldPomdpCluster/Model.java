@@ -1,3 +1,5 @@
+package oldPomdpCluster;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -23,7 +25,7 @@ public class Model {
 
 
 
-    //for speed up test.
+    //for speed up oldPomdpCluster.test.
 
     double[][][] transArray;
     double[][][] obserArray;
@@ -65,7 +67,7 @@ public class Model {
 
 
 
-    //speed up test end.
+    //speed up oldPomdpCluster.test end.
 
 
     public double[] nextPointForHallway(double[] fore, int action, int observation){
@@ -105,7 +107,7 @@ public class Model {
 
 
 
-    //for speed up test.
+    //for speed up oldPomdpCluster.test.
     public static double[] nextPointForHallwayStatic(Model model,double[] fore, int action, int observation){
         double[] next = new double[model.states];
         for(int endState = 0;endState<model.states;endState++){
@@ -623,7 +625,7 @@ public class Model {
 //            }
             Model.printPoint(newPoint);
 
-//            System.out.println(PomdpSolver.getLen(newPoint,bSet)/bSet.size());
+//            System.out.println(oldPomdpCluster.PomdpSolver.getLen(newPoint,bSet)/bSet.size());
 //            System.out.println("bset size:"+bSet.size());
 
         }
@@ -672,7 +674,7 @@ public class Model {
 //
 //                next=model.nextPointForHallway(next,action,observation);
 //                System.out.print("point:");
-//                Model.printPoint(next);
+//                oldPomdpCluster.Model.printPoint(next);
 //                if(new Double(next[0]).isNaN()){
 //                    for(int q=0;q<model.states;q++){
 //                        next[q]=temp[q];

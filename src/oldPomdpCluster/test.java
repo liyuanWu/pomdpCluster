@@ -1,8 +1,6 @@
-import dbscan.Dbscan;
-import dbscan.Point;
+package oldPomdpCluster;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -17,9 +15,9 @@ public class test {
 //        int totalCount=0;
 //        double e=0.37;
 //        int minp=20;
-//        LinkedList<double[]> mylist =UtilClass.readActAndObv("actAndObv.out");
-//        Model model = new Model();
-//        PomdpSolver ps = new PomdpSolver();
+//        LinkedList<double[]> mylist =oldPomdpCluster.UtilClass.readActAndObv("actAndObv.out");
+//        oldPomdpCluster.Model model = new oldPomdpCluster.Model();
+//        oldPomdpCluster.PomdpSolver ps = new oldPomdpCluster.PomdpSolver();
 //        ps.readPoints(new File("pointset"));
 //
 ////        for(double x=0;x<1;x+=0.01){

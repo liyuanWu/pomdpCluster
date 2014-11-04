@@ -1,4 +1,4 @@
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -8,20 +8,20 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import pomdp.environments.POMDP;
-import pomdp.utilities.distance.DistanceMetric;
-import pomdp.utilities.distance.L1Distance;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.distance.DistanceMetric;
+import newPomdpCluster.utilities.distance.L1Distance;
 
 public class BeliefStateFactory{
 
 	protected POMDP m_pPOMDP;
 	/*
-	 * m_bCacheBeliefStatesÎªtrueÊ±£¬
-	 * ¸÷ÖÖ¼ÆËã³öÀ´µÄb£¬¶¼»áÔÚÕâÀï»º´æ×Å¡£
+	 * m_bCacheBeliefStatesÎªtrueÊ±ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï»ºï¿½ï¿½ï¿½Å¡ï¿½
 	 */
 	protected TreeMap<BeliefState,BeliefState> m_hmCachedBeliefStates;
 	protected int m_cDiscretizationLevels;
-	protected int m_cBeliefPoints;//¼ÇÂ¼ÐÅÄîµãµÄÊýÁ¿
+	protected int m_cBeliefPoints;//ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	protected boolean m_bCacheBeliefStates;
 	protected boolean m_bSparseBeliefStates = true;
 	protected BeliefState m_bsInitialState;
@@ -65,7 +65,7 @@ public class BeliefStateFactory{
 			for( Entry<Integer, Double> e : colBSNonZero ){
 				iStartState = e.getKey();
 				dBelief = e.getValue();
-				dTr = m_pPOMDP.tr( iStartState, iAction, iEndState );//Ö´ÐÐ¶¯×÷iAction£¬iStartState×ªÒÆµ½iEndStateµÄ¸ÅÂÊ
+				dTr = m_pPOMDP.tr( iStartState, iAction, iEndState );//Ö´ï¿½Ð¶ï¿½ï¿½ï¿½iActionï¿½ï¿½iStartState×ªï¿½Æµï¿½iEndStateï¿½Ä¸ï¿½ï¿½ï¿½
 				dProb += dTr * dBelief;
 			}
 
@@ -133,7 +133,7 @@ public class BeliefStateFactory{
 			Logger.getInstance().logln(m_pPOMDP.probStartState(0));
 			for(iState = 0 ;iState < cStates; iState++){
 				dValue = m_pPOMDP.probStartState( iState );
-				bsInitial.setValueAt( iState, dValue );//½«ÆðÊ¼¸ÅÂÊ¸³¸ø³õÐÅÄîµã
+				bsInitial.setValueAt( iState, dValue );//ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				dSum += dValue;
 			}
 			if( dSum < 0.99999 || dSum > 1.000001 )
@@ -145,7 +145,7 @@ public class BeliefStateFactory{
 		return m_bsInitialState;
 	}
 	
-	public double calcNormalizingFactor( BeliefState bs, int iAction, int iObservation ){//¼ÆËãbsÖ´ÐÐ¶¯×÷action£¬µÃµ½¹Û²ìobservationµÄ¸ÅÂÊ
+	public double calcNormalizingFactor( BeliefState bs, int iAction, int iObservation ){//ï¿½ï¿½ï¿½ï¿½bsÖ´ï¿½Ð¶ï¿½ï¿½ï¿½actionï¿½ï¿½ï¿½Ãµï¿½ï¿½Û²ï¿½observationï¿½Ä¸ï¿½ï¿½ï¿½
 
 		double dProb = 0.0, dO = 0.0, dBelief = 0.0, dTr = 0.0, dSum = 0.0;
 		int iStartState = 0, iEndState = 0;
@@ -155,15 +155,15 @@ public class BeliefStateFactory{
 
 		while( itNonZeroBeliefs.hasNext() ){
 			eBelief = itNonZeroBeliefs.next();
-			iStartState = (eBelief.getKey()).intValue();//»ñµÃ×´Ì¬
-			dBelief = (eBelief.getValue()).doubleValue();//µÃµ½Ã¿¸ö×´Ì¬µÄ¸ÅÂÊ
+			iStartState = (eBelief.getKey()).intValue();//ï¿½ï¿½ï¿½×´Ì¬
+			dBelief = (eBelief.getValue()).doubleValue();//ï¿½Ãµï¿½Ã¿ï¿½ï¿½×´Ì¬ï¿½Ä¸ï¿½ï¿½ï¿½
 			dSum = 0.0;
-			itNonZeroTransitions = m_pPOMDP.getNonZeroTransitions( iStartState, iAction );//ÔÚ×´Ì¬sÏÂ£¬Ö´ÐÐ¶¯×÷aËùÄÜ¹»×ªÒÆµ½µÄ×´Ì¬
+			itNonZeroTransitions = m_pPOMDP.getNonZeroTransitions( iStartState, iAction );//ï¿½ï¿½×´Ì¬sï¿½Â£ï¿½Ö´ï¿½Ð¶ï¿½ï¿½ï¿½aï¿½ï¿½ï¿½Ü¹ï¿½×ªï¿½Æµï¿½ï¿½ï¿½×´Ì¬
 			while( itNonZeroTransitions.hasNext() ){
 				eTransition = itNonZeroTransitions.next();
 				iEndState = (eTransition.getKey()).intValue();
-				dTr = (eTransition.getValue()).doubleValue();//×ªÒÆµ½iEndStateµÄ¸ÅÂÊ
-				dO = m_pPOMDP.O( iAction, iEndState, iObservation );//ÒÑÖªÖ´ÐÐ¶¯×÷a²¢×ªÒÆµ½×´Ì¬s£¬µÃµ½¹Û²ìoµÄ¸ÅÂÊ
+				dTr = (eTransition.getValue()).doubleValue();//×ªï¿½Æµï¿½iEndStateï¿½Ä¸ï¿½ï¿½ï¿½
+				dO = m_pPOMDP.O( iAction, iEndState, iObservation );//ï¿½ï¿½ÖªÖ´ï¿½Ð¶ï¿½ï¿½ï¿½aï¿½ï¿½×ªï¿½Æµï¿½×´Ì¬sï¿½ï¿½ï¿½Ãµï¿½ï¿½Û²ï¿½oï¿½Ä¸ï¿½ï¿½ï¿½
 				dSum += dO * dTr;
 			}
 			dProb += dSum * dBelief;
@@ -178,9 +178,9 @@ public class BeliefStateFactory{
 	 * @return next belief state
 	 */
 	@SuppressWarnings("rawtypes")
-	public BeliefState nextBeliefState( BeliefState bs, int iAction, int iObservation ){//¼ÆËãÏÂÒ»¸öÐÅÄîµã
+	public BeliefState nextBeliefState( BeliefState bs, int iAction, int iObservation ){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try{
-			BeliefState bsNext = newBeliefState();//newÒ»¸öÐÅÄîµã
+			BeliefState bsNext = newBeliefState();//newÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 			double dNormalizingFactor = 0.0, dNextValue = 0.0;
 			double dBelief = 0.0, dTr = 0.0, dOb = 0.0;
@@ -195,7 +195,7 @@ public class BeliefStateFactory{
 			if( cNonZeroBeliefs.size() > m_pPOMDP.getStateCount() / 2.0 ){	//sparse beliefs
 				for( iEndState = 0 ; iEndState < cStates ; iEndState++ ){
 					dNextValue = nextBeliefValue( bs, iAction, iEndState, iObservation );
-					bsNext.setValueAt( iEndState, dNextValue );//ÉèÖÃÐÅÄîµãÔÚÃ¿Ò»¸ö×´Ì¬µÄ¸ÅÂÊ
+					bsNext.setValueAt( iEndState, dNextValue );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½×´Ì¬ï¿½Ä¸ï¿½ï¿½ï¿½
 					dNormalizingFactor += dNextValue;
 				}
 			}
@@ -233,7 +233,7 @@ public class BeliefStateFactory{
 				e = (Entry) itNonZeroEntries.next();
 				iEndState = ((Number) e.getKey()).intValue();
 				dNextValue = ((Number) e.getValue()).doubleValue();
-				bsNext.setValueAt( iEndState, dNextValue / dNormalizingFactor );//Í¬ÑùÉèÖÃ×´Ì¬µÄ¸ÅÂÊÖµ
+				bsNext.setValueAt( iEndState, dNextValue / dNormalizingFactor );//Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Ä¸ï¿½ï¿½ï¿½Öµ
 			}
 
 			
@@ -280,11 +280,11 @@ public class BeliefStateFactory{
 	}
 	
 	/**
-	 * ¼ÆËã×îÔ¶µÄºó¼Ì
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Äºï¿½ï¿½
 	 * 
-	 * actionÊÇËæ»úÈ¡Ò»¸ö£¬oÊÇÈ«±éÀúµÄ
-	 * @param vBeliefPoints ÓÃÀ´¼ÆËã¾àÀëµÄ
-	 * @param bs µ±Ç°b
+	 * actionï¿½ï¿½ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param vBeliefPoints ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param bs ï¿½ï¿½Ç°b
 	 * @return
 	 */
 	public BeliefState computeRandomFarthestSuccessor( Vector<BeliefState> vBeliefPoints, BeliefState bs )
@@ -297,21 +297,21 @@ public class BeliefStateFactory{
 		double dMaxDist = 0.0, dDist = 0.0;
 		double dOb = 0.0;
 		
-		//Ëæ»úÈ¡Ò»¸öaction
+		//ï¿½ï¿½ï¿½È¡Ò»ï¿½ï¿½action
 		iAction = m_rndGenerator.nextInt( m_pPOMDP.getActionCount() );
-		//±éÀúobservation
+		//ï¿½ï¿½ï¿½ï¿½observation
 		for(iObservation = 0; iObservation<cObservations; iObservation++)
 		{
-			//bsÏÂÖ´ÐÐiAction¹Û²ìµ½iObservationµÄ¸ÅÂÊ
+			//bsï¿½ï¿½Ö´ï¿½ï¿½iActionï¿½Û²ìµ½iObservationï¿½Ä¸ï¿½ï¿½ï¿½
 			dOb = bs.probabilityOGivenA( iAction, iObservation );
 			if(dOb>0.0)
 			{
-				//¼ÆËãb¡¢a¡¢oÊ±£¬ºó¼Ìb
+				//ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aï¿½ï¿½oÊ±ï¿½ï¿½ï¿½ï¿½ï¿½b
 				bsNext = bs.nextBeliefState(iAction, iObservation);
 				if(bsNext!=null)
 				{
 					dDist = distance(vBeliefPoints, bsNext);
-					if( dDist > dMaxDist )//ÄÄ¸öºó¼Ì¾àÀëÐÅÄîµã¼¯ºÏvBeliefPoints×îÔ¶¾ÍÈ¡ÄÄ¸ö
+					if( dDist > dMaxDist )//ï¿½Ä¸ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¼¯ï¿½ï¿½vBeliefPointsï¿½ï¿½Ô¶ï¿½ï¿½È¡ï¿½Ä¸ï¿½
 					{
 						dMaxDist = dDist;
 						bsMaxDist = bsNext;
@@ -327,7 +327,7 @@ public class BeliefStateFactory{
 	}
 	
 	/**
-	 * ÇóvBeliefStatesÕâ¸ö¼¯ºÏÓëbsµÄ×î½ü¾àÀë¡ª¡ª¡ª¡ª¼´Çó¼¯ºÏÖÐµÄÐÅÄî×´Ì¬ÓëbsµÄ×î¶Ì¾àÀë
+	 * ï¿½ï¿½vBeliefStatesï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¼¯ºï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½bsï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½
 	 * 
 	 * @param vBeliefStates
 	 * @param bs

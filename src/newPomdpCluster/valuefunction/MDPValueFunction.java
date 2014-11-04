@@ -1,10 +1,10 @@
-package pomdp.valuefunction;
+package newPomdpCluster.valuefunction;
 
-import pomdp.algorithms.PolicyStrategy;
-import pomdp.environments.POMDP;
-import pomdp.utilities.AlphaVector;
-import pomdp.utilities.BeliefState;
-import pomdp.utilities.RandomGenerator;
+import newPomdpCluster.algorithms.PolicyStrategy;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.AlphaVector;
+import newPomdpCluster.utilities.BeliefState;
+import newPomdpCluster.utilities.RandomGenerator;
 
 
 public class MDPValueFunction extends PolicyStrategy {

@@ -1,10 +1,10 @@
-package pomdp.utilities;
+package newPomdpCluster.utilities;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import pomdp.utilities.datastructures.Function;
+import newPomdpCluster.utilities.datastructures.Function;
 
 public class SparseTabularFunction extends Function {
 
@@ -82,7 +82,7 @@ public class SparseTabularFunction extends Function {
 	}
 	
 	/**
-	 * ÓÃÓÚTransition FunctionµÄÒ»¸ö×ª»»µÄÉèÖÃ ²ÎÊý£ºiStartState, iActionIdx, iEndState, dValue)
+	 * ï¿½ï¿½ï¿½ï¿½Transition Functionï¿½ï¿½Ò»ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½iStartState, iActionIdx, iEndState, dValue)
 	 */
 	public void setValue( int arg1, int arg2, int arg3, double dValue ){
 		

@@ -1,4 +1,4 @@
-package pomdp.algorithms.pointbased;
+package newPomdpCluster.algorithms.pointbased;
 
 
 
@@ -9,14 +9,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import pomdp.algorithms.ValueIteration;
-import pomdp.environments.Model;
-import pomdp.environments.POMDP;
-import pomdp.utilities.AlphaVector;
-import pomdp.utilities.BeliefState;
-import pomdp.utilities.BeliefStateVector;
-import pomdp.utilities.Logger;
-import pomdp.utilities.Pair;
+import newPomdpCluster.algorithms.ValueIteration;
+import newPomdpCluster.environments.Model;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.AlphaVector;
+import newPomdpCluster.utilities.BeliefState;
+import newPomdpCluster.utilities.BeliefStateVector;
+import newPomdpCluster.utilities.Pair;
 
 public class ClusterValueIteration extends ValueIteration{
 	protected Iterator<BeliefState> m_itCurrentIterationPoints;
@@ -46,7 +45,7 @@ public class ClusterValueIteration extends ValueIteration{
 	{
 		BeliefState bs = pointset.firstElement(); 
 		
-		while(pointset.size() < 5000)//ÊÕ¼¯5000¸öµã
+		while(pointset.size() < 5000)//ï¿½Õ¼ï¿½5000ï¿½ï¿½ï¿½ï¿½
 		{
 			int iAction = m_rndGenerator.nextInt( m_pPOMDP.getActionCount() );
 			int iObservation = m_rndGenerator.nextInt(m_pPOMDP.getObservationCount());
@@ -54,7 +53,7 @@ public class ClusterValueIteration extends ValueIteration{
 			
 			if(dOb>0.0)
 			{
-				//¼ÆËãb¡¢a¡¢oÊ±£¬ºó¼Ìb
+				//ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½aï¿½ï¿½oÊ±ï¿½ï¿½ï¿½ï¿½ï¿½b
 				BeliefState bsNext = bs.nextBeliefState(iAction, iObservation);
 				if(bsNext != null)
 				{
@@ -121,14 +120,14 @@ public class ClusterValueIteration extends ValueIteration{
 	            LinkedList<double[]> tempSP;
 	            tempSP = aFsc.samplepoints;
 
-	            //¸÷Î¬×î´óµã+Öµ×î´ó×îÐ¡µã
+	            //ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½+Öµï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 
 	            for (int k = 0; k < model.states + 2; k++) {
 	                tempSP.add(aFsc.pointGroup.get(0));
 	            }
 
 
-	            //ÏÈ½«¸÷Î¬Öµ×î´óµÄµã·ÅÈëÑù±¾µã¼¯£¬×îºó·ÅÈë×î´óºÍ×îÐ¡ÖµµÄµã
+	            //ï¿½È½ï¿½ï¿½ï¿½Î¬Öµï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¼¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Öµï¿½Äµï¿½
 	            for (int k = 0; k < aFsc.pointGroup.size(); k++) {
 	                for (int m = 0; m < model.states; m++) {
 	                    if (aFsc.pointGroup.get(k)[m] > tempSP.get(m)[m]) {
@@ -172,11 +171,11 @@ public class ClusterValueIteration extends ValueIteration{
 	}
 	
 	public void clusterIteration(String sPath) {
-		//maxRunningTimeºÍnumEvaluationsÃ»ÓÐÓÃµ½  Ó¦¸ÃÉ¾³ý
+		//maxRunningTimeï¿½ï¿½numEvaluationsÃ»ï¿½ï¿½ï¿½Ãµï¿½  Ó¦ï¿½ï¿½É¾ï¿½ï¿½
 		
 	BeliefStateVector<BeliefState> pointset = new BeliefStateVector<BeliefState>();
 	pointset.add(null, m_pPOMDP.getBeliefStateFactory().getInitialBeliefState() );
-	expand(pointset);//À©ÕÅ5000¸öµã
+	expand(pointset);//ï¿½ï¿½ï¿½ï¿½5000ï¿½ï¿½ï¿½ï¿½
 	
 	System.out.println("the size of pointset is " + pointset.size());
 	
@@ -187,23 +186,23 @@ public class ClusterValueIteration extends ValueIteration{
 	{
 		ArrayList<ArrayList<BeliefState>> treeLevel = vBeliefState.getTreeLevelInfo();
 		
-		int levelSize = treeLevel.size();//µÃµ½²ãÊý
+		int levelSize = treeLevel.size();//ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
 		for(int i = levelSize - 1; i >= 0; --i)
 		{
-			ArrayList<BeliefState> level = treeLevel.get(i);//ÄæÐòµÃµ½Ã¿Ò»²ãµÄÐÅÄîµã¼¯ºÏ
+			ArrayList<BeliefState> level = treeLevel.get(i);//ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¼¯ï¿½ï¿½
 			
 			m_itCurrentIterationPoints = level.iterator();
-			while(m_itCurrentIterationPoints.hasNext())//¸üÐÂÃ¿Ò»²ãµÄÐÅÄîµã
+			while(m_itCurrentIterationPoints.hasNext())//ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				BeliefState bsCurrent = m_itCurrentIterationPoints.next();
-				AlphaVector avCurrentMax = m_vValueFunction.getMaxAlpha( bsCurrent );//µÃµ½×î´óµÄÏòÁ¿
-				AlphaVector avBackup = backup( bsCurrent );//¸üÐÂÐÅÄîµã
+				AlphaVector avCurrentMax = m_vValueFunction.getMaxAlpha( bsCurrent );//ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				AlphaVector avBackup = backup( bsCurrent );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				
 				double dBackupValue = avBackup.dotProduct( bsCurrent );
 				double dValue = avCurrentMax.dotProduct( bsCurrent );
 				double dDelta = dBackupValue - dValue;
 				
-				//Èç¹ûÓÐÌáÉý£¬²Å»áÔö¼ÓÐÂµÄ¦Á
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ¦ï¿½
 				if(dDelta >= 0)
 					m_vValueFunction.addPrunePointwiseDominated( avBackup );
 			}

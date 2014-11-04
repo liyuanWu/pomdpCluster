@@ -1,33 +1,33 @@
-package pomdp;
+package newPomdpCluster;
 
-import pomdp.algorithms.ValueIteration;
-import pomdp.algorithms.pointbased.ClusterValueIteration;
-import pomdp.environments.POMDP;
-import pomdp.utilities.Logger;
+import newPomdpCluster.algorithms.ValueIteration;
+import newPomdpCluster.algorithms.pointbased.ClusterValueIteration;
+import newPomdpCluster.environments.POMDP;
+import newPomdpCluster.utilities.Logger;
 
 public class POMDPSolver {
 
 	public static void main(String[] args) {
-		String sPath = "Models/";// µÃµ½modelÂ·¾¶
-		String sModelName = "hallway";// modelÃû
-		String sMethodName = "PBVI";//·½·¨Ãû
-		Logger.getInstance().setOutput(true);//ÔÊÐíÊä³ö
-		Logger.getInstance().setSilent(false);//ÔÊÐíÊä³öµ½¿ØÖÆÌ¨
+		String sPath = "Models/";// ï¿½Ãµï¿½modelÂ·ï¿½ï¿½
+		String sModelName = "hallway";// modelï¿½ï¿½
+		String sMethodName = "PBVI";//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		Logger.getInstance().setOutput(true);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		Logger.getInstance().setSilent(false);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 		try {
-			String sOutputDir = "logs/POMDPSolver";// Êä³öÂ·¾¶
-			String sFileName = sModelName + "_" + sMethodName + ".txt";// Êä³öÎÄ¼þÃû
+			String sOutputDir = "logs/POMDPSolver";// ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+			String sFileName = sModelName + "_" + sMethodName + ".txt";// ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 			Logger.getInstance().setOutputStream(sOutputDir, sFileName);
 		} catch (Exception e) {
 			System.err.println(e);
 		}
 
 		POMDP pomdp = null;
-		double dTargetADR = 100.0;// Ä¿±êÆ½¾ùÕÛ¿Û»Ø±¨Öµ£¬¿ØÖÆ½áÊøÌõ¼þ
+		double dTargetADR = 100.0;// Ä¿ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Û¿Û»Ø±ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
 			pomdp = new POMDP();
-			pomdp.load(sPath + sModelName + ".POMDP");// ÔØÈëpomdpÄ£ÐÍ
+			pomdp.load(sPath + sModelName + ".POMDP");// ï¿½ï¿½ï¿½ï¿½pomdpÄ£ï¿½ï¿½
 			
-			//Êä³ö×î´ó»Ø±¨ÖµºÍ×îÐ¡»Ø±¨Öµ
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Öµï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Ø±ï¿½Öµ
     	    //Logger.getInstance().logln("max is " + pomdp.getMaxR() + " min is " + pomdp.getMinR());
 		} catch (Exception e) {
 			Logger.getInstance().logln(e);

@@ -1,6 +1,6 @@
-package pomdp.utilities.distance;
+package newPomdpCluster.utilities.distance;
 
-import pomdp.utilities.BeliefState;
+import newPomdpCluster.utilities.BeliefState;
 
 public interface DistanceMetric 
 {

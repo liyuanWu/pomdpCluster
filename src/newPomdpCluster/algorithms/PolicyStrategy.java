@@ -4,9 +4,9 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package pomdp.algorithms;
+package newPomdpCluster.algorithms;
 
-import pomdp.utilities.BeliefState;
+import newPomdpCluster.utilities.BeliefState;
 
 
 /**
